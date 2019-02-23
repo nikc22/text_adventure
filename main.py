@@ -1,18 +1,29 @@
 from room import Room
-from character import Enemy, Friend
+from character import Enemy, Friend, Nuetral
 from item import Item
 from backpack import Backpack
 import helpers as hlp
+
+
+def print_score():
+    """Prints the players score"""
+    print('Scores:')
+    print(str(hugs) + ' hugs given')
+    print(str(fights) + ' fights won')
+
 
 kitchen = Room('Kitchen', 'A dank and dirty room buzzing with flies')
 dinning_hall = Room('Dinning Hall', 'A large room with ornate golden decorations on every wall')
 ballroom = Room('Ballroom', 'A place where various conspiricies and affairs of the heart were launched, admist dancing and cavorting')
 drawing_room = Room('Drawing Room', 'An austere room with large couches dominating the space')
 shed = Room('Shed', 'A garden shed full of interesting items')
-path = Room('Path', 'A path leading from the house to the stream')
+path = Room('Path', 'A path leading from the house to the stream, lined with trees')
 stream = Room('Stream', 'A burbbling little stream, crossed by a bridge to the north')
 stream2 = Room('Stream', 'A burbbling little stream, crossed by a bridge to the north')
 bridge = Room('Bridge', 'A bridge that to nowhere')
+shop = Room('Shop', 'A small shop filled with curious items')
+entrance = Room('Entrance', 'A small room with an umbrella stand behind wooden doors that are two stories high')
+drive = Room('Driveway', 'A promenade that leads to the carriage way, with buggy near the house, unfortunately wihtout the horse')
 
 kitchen.link_room(dinning_hall, "south")
 kitchen.link_room(shed, 'east')
@@ -20,6 +31,7 @@ dinning_hall.link_room(kitchen, "north")
 dinning_hall.link_room(ballroom, "west")
 dinning_hall.link_room(drawing_room, "south")
 drawing_room.link_room(dinning_hall, "north")
+drawing_room.link_room(entrance, 'south')
 ballroom.link_room(dinning_hall, "east")
 shed.link_room(kitchen, 'west')
 shed.link_room(path, 'east')
@@ -30,7 +42,16 @@ stream.link_room(stream2, 'north')
 stream2.link_room(stream2, 'south')
 stream2.link_room(bridge, 'north')
 bridge.link_room(stream2, 'south')
+entrance.link_room(drawing_room, 'north')
+entrance.link_room(drive, 'south')
+drive.link_room(entrance, 'north')
+drive.link_room(shop, 'south')
+shop.link_room(drive, 'north')
 
+path.set_special('climb')
+
+
+# Enemies
 dave = Enemy('Dave', 'A smelly grumpy zombie')
 dave.set_conversation('Brrlgrh... rgrhl... brains...')
 dave.set_weakness('cheese')
@@ -43,13 +64,20 @@ jill = Enemy('Jill', 'A nasty troll')
 jill.set_conversation('How much will you pay me to cross the bridge?')
 jill.set_weakness('duster')
 
+
+# Friends
 connie = Friend('Connie', 'A friendly skelton')
 connie.set_conversation('How are you today?')
 connie.set_hint('Dave doesn\'t like cheese.')
 
-jim = Friend('Jim', 'A friendly servant')
+jim = Friend('Jim', 'A friendly gardiner')
 jim.set_conversation('I hope it doens\'t rain inside again today')
 jim.set_hint('Jack doesn\'t like books')
+
+# Neutral
+gaylord = Nuetral('Gaylord', 'A Bored Shop keeper')
+gaylord.set_conversation('I don\'t have many things to sell, can you bring me some more items for my shop')
+
 
 cheese = Item('cheese', 'A large and smelly block of cheese', 2.0)
 book = Item('book', 'A tome full of wonderous knowledge', 3.0)
@@ -61,13 +89,14 @@ ballroom.set_character(connie)
 bridge.set_character(jill)
 shed.set_character(jack)
 drawing_room.set_character(jim)
+shop.set_character(gaylord)
 
 ballroom.set_item(cheese)
 dinning_hall.set_item(book)
 kitchen.set_item(breadstick)
 drawing_room.set_item(duster)
 
-backpack = Backpack(15.0)
+backpack = Backpack(15.0)  # Number determines backpack capacity
 
 current_room = kitchen
 dead = False
@@ -91,8 +120,11 @@ while not dead:
 
     command = input("> ")
 
+    # Movement Commands
     if command in ['north', 'south', 'west', 'east', 'n', 's', 'w', 'e']:
         current_room = current_room.move(command)
+
+    # Character Commands
     elif command == 'talk':
         inhabitant.talk()
     elif command == 'hum':
@@ -116,6 +148,8 @@ while not dead:
             dead = True
         else:
             hugs += 1
+
+    # Item/Inventory Commands
     elif command in ('take', 'get'):
         if current_room.item is None:
             print('Nothing to take')
@@ -137,13 +171,23 @@ while not dead:
             print('There is already an item in this room, you\'ll need to drop it somewhere else')
     elif command == 'inv':
         backpack.get_inventory()
+
+    # Game Commands
     elif command == 'help':
         hlp.help_contents()
+    elif command == 'score':
+        print_score()
+#        print('Scores:')
+#        print(str(hugs) + ' hugs given')
+#        print(str(fights) + ' fights won')
     elif command == 'exit':
         dead = True
+
+    # Don't know/Evrything else Commands
     else:
         print('I don\'t know how to ' + command + '. Try help to see what I know about')
 
+    # Exit and print scores
     if dead:
         print('\nThank you for playing')
         print('Scores:')

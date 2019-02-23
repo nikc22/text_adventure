@@ -13,5 +13,14 @@ def help_contents():
     print('inv - display the contents of my backpack')
     print('fight - challenge the room inhabitant to a duel with an item')
     print('hum - a way of waiting for something to happen')
+    print('climb - some places have things that you can climb')
+    print('score - print the scores so far')
     print('exit - leave the game')
     return True
+
+
+def print_score():
+    """Prints the players score"""
+    print('Scores:')
+    print(str(hugs) + ' hugs given')
+    print(str(fights) + ' fights won')

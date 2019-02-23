@@ -18,7 +18,7 @@ class Character():
     def talk(self):
         """Prints the conversation text, if it exists"""
         if self.conversation is not None:
-            print("[" + self.name + " says]: " + self.conversation)
+            print("[" + self.name + "] says: " + self.conversation)
         else:
             print(self.name + " doesn't want to talk to you")
 
@@ -77,4 +77,16 @@ class Friend(Character):
     def get_hint(self):
         """Returns the friends hint if there is one"""
         if self.hint is not None:
-            print("[" + self.name + " says]: " + self.hint)
+            print("[" + self.name + "] says: " + self.hint)
+
+
+class Nuetral(Character):
+
+    def __init__(self, char_name, char_description):
+        """Creates a nuetral character"""
+        super().__init__(char_name, char_description)
+
+    def hug(self):
+        """Hug a Neutral character"""
+        print('[' + self.name + '] says: That was akward')
+        return True

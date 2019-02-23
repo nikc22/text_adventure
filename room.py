@@ -7,6 +7,15 @@ class Room():
         self.linked_rooms = {}
         self.character = None
         self.item = None
+        self.special = None
+
+    def set_special(self, special_thing):
+        """Sets the command that is special for a room"""
+        self.special = special_thing
+
+    def get_special(self):
+        """Returns to special command for the room"""
+        return self.special
 
     def set_character(self, room_character):
         """Places a character in the room"""
