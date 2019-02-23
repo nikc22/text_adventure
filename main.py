@@ -48,8 +48,7 @@ drive.link_room(entrance, 'north')
 drive.link_room(shop, 'south')
 shop.link_room(drive, 'north')
 
-path.set_special('climb')
-
+path.set_special('climb', 'You climb a tree, but don\'t see much that is special')
 
 # Enemies
 dave = Enemy('Dave', 'A smelly grumpy zombie')
@@ -125,7 +124,7 @@ while not dead:
         current_room = current_room.move(command)
     elif command == 'climb':
         if current_room.get_special() == 'climb':
-            print('You climbed a tree, but didn\'t see much')
+            print(current_room.get_special_text())
         else:
             print('There is nothing to climb here')
 

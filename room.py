@@ -8,14 +8,20 @@ class Room():
         self.character = None
         self.item = None
         self.special = None
+        self.special_text = None
 
-    def set_special(self, special_thing):
-        """Sets the command that is special for a room"""
+    def set_special(self, special_thing, special_text):
+        """Sets the command that is special and it's text for a room"""
         self.special = special_thing
+        self.special_text = special_text
 
     def get_special(self):
         """Returns to special command for the room"""
         return self.special
+
+    def get_special_text(self):
+        """Returns to special command for the room"""
+        return self.special_text
 
     def set_character(self, room_character):
         """Places a character in the room"""
