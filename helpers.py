@@ -17,10 +17,3 @@ def help_contents():
     print('score - print the scores so far')
     print('exit - leave the game')
     return True
-
-
-def print_score():
-    """Prints the players score"""
-    print('Scores:')
-    print(str(hugs) + ' hugs given')
-    print(str(fights) + ' fights won')

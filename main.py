@@ -123,6 +123,11 @@ while not dead:
     # Movement Commands
     if command in ['north', 'south', 'west', 'east', 'n', 's', 'w', 'e']:
         current_room = current_room.move(command)
+    elif command == 'climb':
+        if current_room.get_special() == 'climb':
+            print('You climbed a tree, but didn\'t see much')
+        else:
+            print('There is nothing to climb here')
 
     # Character Commands
     elif command == 'talk':
