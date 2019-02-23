@@ -14,6 +14,7 @@ def help_contents():
     print('fight - challenge the room inhabitant to a duel with an item')
     print('hum - a way of waiting for something to happen')
     print('climb - some places have things that you can climb')
+    print('swim - swim in a body of water')
     print('score - print the scores so far')
     print('exit - leave the game')
     return True
