@@ -95,7 +95,7 @@ gaylord.set_conversation('I don\'t have many things to sell, can you bring me so
 cheese = Item('cheese', 'A large and smelly block of cheese', 2.0)
 book = Item('book', 'A tome full of wonderous knowledge', 3.0)
 breadstick = Item('breadstick', 'A baugette old enough to be used as a weapon', 1.5)
-apple_pie = Item('Apple Pie', 'A freshly baked pie made with apples form the orchard')
+apple_pie = Item('Apple Pie', 'A freshly baked pie made with apples form the orchard', 2.0)
 duster = Item('feather duster', 'A moth eaten excuse for a duster', 1.0)
 
 dinning_hall.set_character(dave)
