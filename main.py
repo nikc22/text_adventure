@@ -10,6 +10,7 @@ def print_score():
     print('Scores:')
     print(str(hugs) + ' hugs given')
     print(str(fights) + ' fights won')
+    print(str(favours) + ' favours done')
 
 
 kitchen = Room('Kitchen', 'A dank and dirty room buzzing with flies')
@@ -24,15 +25,24 @@ bridge = Room('Bridge', 'A bridge that to nowhere')
 shop = Room('Shop', 'A small shop filled with curious items')
 entrance = Room('Entrance', 'A small room with an umbrella stand behind wooden doors that are two stories high')
 drive = Room('Driveway', 'A promenade that leads to the carriage way, with buggy near the house, unfortunately wihtout the horse')
+games_room = Room('Games Room', 'A place for billiards and discussion after dinner')
+stairs = Room('Stairs', 'A grand staircase leading up to the first floor and down to the cellar')
+herb_garden = Room('Herb Garden', 'A lovely garden full of fresh Rosemary and Thyme, amongst other things')
 
-kitchen.link_room(dinning_hall, "south")
+
+kitchen.link_room(dinning_hall, 'south')
 kitchen.link_room(shed, 'east')
-dinning_hall.link_room(kitchen, "north")
-dinning_hall.link_room(ballroom, "west")
-dinning_hall.link_room(drawing_room, "south")
-drawing_room.link_room(dinning_hall, "north")
+dinning_hall.link_room(kitchen, 'north')
+dinning_hall.link_room(ballroom, 'west')
+dinning_hall.link_room(drawing_room, 'south')
+drawing_room.link_room(dinning_hall, 'north')
 drawing_room.link_room(entrance, 'south')
-ballroom.link_room(dinning_hall, "east")
+drawing_room.link_room(games_room, 'west')
+ballroom.link_room(dinning_hall, 'east')
+ballroom.link_room(games_room, 'south')
+games_room.link_room(ballroom, 'north')
+games_room.link_room(drawing_room, 'east')
+games_room.link_room(stairs, 'south')
 shed.link_room(kitchen, 'west')
 shed.link_room(path, 'east')
 path.link_room(shed, 'west')
@@ -44,11 +54,14 @@ stream2.link_room(bridge, 'north')
 bridge.link_room(stream2, 'south')
 entrance.link_room(drawing_room, 'north')
 entrance.link_room(drive, 'south')
+entrance.link_room(stairs, "west")
+stairs.link_room(games_room, 'north')
+stairs.link_room(entrance, 'east')
 drive.link_room(entrance, 'north')
 drive.link_room(shop, 'south')
 shop.link_room(drive, 'north')
 
-path.set_special('climb', 'You climb a tree, but don\'t see much that is special')
+path.set_special('climb', 'You climb a tree, but don\'t see much that is special apart from a lake to the north')
 stream.set_special('swim', 'You take a refreshing dip in the stream')
 
 # Enemies
@@ -82,6 +95,7 @@ gaylord.set_conversation('I don\'t have many things to sell, can you bring me so
 cheese = Item('cheese', 'A large and smelly block of cheese', 2.0)
 book = Item('book', 'A tome full of wonderous knowledge', 3.0)
 breadstick = Item('breadstick', 'A baugette old enough to be used as a weapon', 1.5)
+apple_pie = Item('Apple Pie', 'A freshly baked pie made with apples form the orchard')
 duster = Item('feather duster', 'A moth eaten excuse for a duster', 1.0)
 
 dinning_hall.set_character(dave)
@@ -93,7 +107,8 @@ shop.set_character(gaylord)
 
 ballroom.set_item(cheese)
 dinning_hall.set_item(book)
-kitchen.set_item(breadstick)
+kitchen.set_item(apple_pie)
+games_room.set_item(breadstick)
 drawing_room.set_item(duster)
 
 backpack = Backpack(15.0)  # Number determines backpack capacity
@@ -102,6 +117,7 @@ current_room = kitchen
 dead = False
 hugs = 0
 fights = 0
+favours = 0
 
 
 print('Welcome to a little adventure')
@@ -187,9 +203,6 @@ while not dead:
         hlp.help_contents()
     elif command == 'score':
         print_score()
-#        print('Scores:')
-#        print(str(hugs) + ' hugs given')
-#        print(str(fights) + ' fights won')
     elif command == 'exit':
         dead = True
 
@@ -200,6 +213,4 @@ while not dead:
     # Exit and print scores
     if dead:
         print('\nThank you for playing')
-        print('Scores:')
-        print(str(hugs) + ' hugs given')
-        print(str(fights) + ' fights won')
+        print_score()
