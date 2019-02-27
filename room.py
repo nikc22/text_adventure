@@ -9,6 +9,25 @@ class Room():
         self.item = None
         self.special = None
         self.special_text = None
+        self.lock = False
+        self.unlock_item = None
+
+    def set_unlock_item(self, lock_item):
+        self.unlock_item = lock_item
+
+    def get_unlock_item(self):
+        return self.unlock_item
+
+    def lock(self, lock_item):
+        if lock_item == self.unlock_item:
+            self.lock = True
+
+    def unlock(self, lock_item):
+        if lock_item == self.unlock_item:
+            self.lock = False
+
+    def get_lockstatus(self):
+        return self.lock
 
     def set_special(self, special_thing, special_text):
         """Sets the command that is special and it's text for a room"""
