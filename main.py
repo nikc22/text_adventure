@@ -44,6 +44,8 @@ mainstreet2 = Room('Main Street', 'The main street of the village')
 bigstreet = Room('Big Street', 'The secondary street of the village')
 bigstreet2 = Room('Big Street', 'The secondary street of the village')
 
+# bathroom.set_unlock_item('House Key', True, 'The lady of the house is using the bathroom')
+
 kitchen.link_room(dinning_hall, 'south')
 kitchen.link_room(shed, 'east')
 dinning_hall.link_room(kitchen, 'north')

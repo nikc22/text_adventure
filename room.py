@@ -11,9 +11,18 @@ class Room():
         self.special_text = None
         self.lock = False
         self.unlock_item = None
+        self.lock_text = None
 
-    def set_unlock_item(self, lock_item):
+    def set_unlock_item(self, lock_item, lock_status, lock_text):
         self.unlock_item = lock_item
+        self.lock = lock_status
+        self.lock_text = lock_text
+
+    def set_lock_text(self, lock_text):
+        self.lock_text = lock_text
+
+    def get_lock_text(self):
+        return self.lock_text
 
     def get_unlock_item(self):
         return self.unlock_item
@@ -26,7 +35,7 @@ class Room():
         if lock_item == self.unlock_item:
             self.lock = False
 
-    def get_lockstatus(self):
+    def get_lock_status(self):
         return self.lock
 
     def set_special(self, special_thing, special_text):
@@ -87,6 +96,7 @@ class Room():
         print("The " + self.get_name())
         print("-------------------")
         print(self.get_description())
+        # print('This rooms lock is ' + str(self.get_lock_status()))
         for direction in self.linked_rooms:
             room = self.linked_rooms[direction]
             print("The " + room.get_name() + " is " + direction)
@@ -101,8 +111,16 @@ class Room():
             direction = 'west'
         elif direction == 'e':
             direction = 'east'
+
         if direction in self.linked_rooms:
-            return self.linked_rooms[direction]
+            next_room = self.linked_rooms[direction]
         else:
             print("You can't go that way")
             return self
+        if next_room.get_lock_status() is True:
+            print("The door is locked, you can't go that way")
+            if next_room.get_lock_text() is not None:
+                print(next_room.get_lock_text())
+            return self
+        else:
+            return next_room
