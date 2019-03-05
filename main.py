@@ -116,7 +116,7 @@ school_room.link_room(bigstreet, 'west')
 # Special Commands
 
 path_climb = Room_Command('climb', 'You climb a tree, but don\'t see much that is special apart from a lake to the north')
-path_pick = Room_Command('pick', 'You pick some flowers, although the wilt in your hand as you pick them')
+path_pick = Room_Command('pick', 'You pick some flowers and try and put them in your bacpack')
 stream_swim = Room_Command('swim', 'You take a refreshing dip in the stream')
 stream_pick = Room_Command('pick', 'You pick some flowers, although the wilt in your hand as you pick them')
 
@@ -175,6 +175,9 @@ kitchen.set_item(apple_pie)
 games_room.set_item(breadstick)
 drawing_room.set_item(duster)
 
+# Special Command Items
+path_pick.set_item(flower)
+
 backpack = Backpack(15.0)  # Number determines backpack capacity
 
 current_room = kitchen
@@ -218,6 +221,12 @@ while not dead:
     elif command == 'pick':
         if current_room.get_special('pick') is True:
             print(current_room.get_special_text('pick'))
+            item = current_room.get_special_item('pick')
+            if item is not None:
+                if backpack.add_item(item) is True:
+                    print('The ' + item.get_name() + ' is now in your backpack')
+                else:
+                    print('The ' + item.get_name() + ' didn\'t fit in your backpack, maybe you need to drop an item')
         else:
             print('There is nothing to pick here')
 

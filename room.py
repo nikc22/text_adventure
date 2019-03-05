@@ -13,35 +13,43 @@ class Room():
         self.lock_text = None
 
     def set_unlock_item(self, lock_item, lock_status, lock_text):
+        """Sets the item used to lock/unlock the room"""
         self.unlock_item = lock_item
         self.lock = lock_status
         self.lock_text = lock_text
 
     def set_lock_text(self, lock_text):
+        """Sets the text to be returned when trying to enter a locked room"""
         self.lock_text = lock_text
 
     def get_lock_text(self):
+        """Gets the text to be returned when trying to enter a locked room"""
         return self.lock_text
 
     def get_unlock_item(self):
+        """Gets the item to be used to unlock the room"""
         return self.unlock_item
 
     def lock(self, lock_item):
+        """Locks the room"""
         if lock_item == self.unlock_item:
             self.lock = True
 
     def unlock(self, lock_item):
+        """Unlocks the Room"""
         if lock_item == self.unlock_item:
             self.lock = False
 
     def get_lock_status(self):
+        """Gets the lock status value (Locked/Unlocked)"""
         return self.lock
 
     def set_special(self, room_command):
+        """Sets a special command for a room"""
         self.special_commands[room_command.get_command()] = room_command
 
     def get_special(self, command):
-        """Returns to special command for the room"""
+        """Returns whether a special command applies to the room"""
         if len(self.special_commands) != 0:
             for ind in self.special_commands:
                 comm = self.special_commands[ind]
@@ -52,7 +60,7 @@ class Room():
         # return self.special_commands(command)
 
     def get_special_text(self, command):
-        """Returns to special command for the room"""
+        """Returns to text for aspecial command for the room"""
         if len(self.special_commands) != 0:
             for ind in self.special_commands:
                 comm = self.special_commands[ind]
@@ -60,6 +68,16 @@ class Room():
                     return comm.get_command_text()
         else:
             return False
+
+    def get_special_item(self, command):
+        """Returns to text for aspecial command for the room"""
+        if len(self.special_commands) != 0:
+            for ind in self.special_commands:
+                comm = self.special_commands[ind]
+                if comm.get_command() == command:
+                    return comm.get_item()
+        else:
+            return None
 
     def set_character(self, room_character):
         """Places a character in the room"""
