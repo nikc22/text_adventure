@@ -7,8 +7,9 @@ class Room():
         self.linked_rooms = {}
         self.character = None
         self.item = None
-        self.special = None
-        self.special_text = None
+        # self.special = None
+        # self.special_text = None
+        self.special_commands = {}
         self.lock = False
         self.unlock_item = None
         self.lock_text = None
@@ -38,18 +39,35 @@ class Room():
     def get_lock_status(self):
         return self.lock
 
-    def set_special(self, special_thing, special_text):
+#    def set_special2(self, special_thing, special_text):
         """Sets the command that is special and it's text for a room"""
-        self.special = special_thing
-        self.special_text = special_text
+#        self.special = special_thing
+#        self.special_text = special_text
+#        self.special_commands[special_thing] = special_text
 
-    def get_special(self):
-        """Returns to special command for the room"""
-        return self.special
+    def set_special(self, room_command):
+        self.special_commands[room_command.get_command()] = room_command
 
-    def get_special_text(self):
+    def get_special(self, command):
         """Returns to special command for the room"""
-        return self.special_text
+        if len(self.special_commands) != 0:
+            for ind in self.special_commands:
+                comm = self.special_commands[ind]
+                if comm.get_command() == command:
+                    return True
+        else:
+            return False
+        # return self.special_commands(command)
+
+    def get_special_text(self, command):
+        """Returns to special command for the room"""
+        if len(self.special_commands) != 0:
+            for ind in self.special_commands:
+                comm = self.special_commands[ind]
+                if comm.get_command() == command:
+                    return comm.get_command_text()
+        else:
+            return False
 
     def set_character(self, room_character):
         """Places a character in the room"""

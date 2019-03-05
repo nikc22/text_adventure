@@ -2,6 +2,7 @@ from room import Room
 from character import Enemy, Friend, Nuetral
 from item import Item
 from backpack import Backpack
+from room_command import Room_Command
 import helpers as hlp
 
 
@@ -112,8 +113,16 @@ general_store.link_room(mainstreet, 'east')
 bigstreet.link_room(school_room, 'east')
 school_room.link_room(bigstreet, 'west')
 
-path.set_special('climb', 'You climb a tree, but don\'t see much that is special apart from a lake to the north')
-stream.set_special('swim', 'You take a refreshing dip in the stream')
+# Special Commands
+# path.set_special2('climb', 'You climb a tree, but don\'t see much that is special apart from a lake to the north')
+# stream.set_special2('swim', 'You take a refreshing dip in the stream')
+
+path_climb = Room_Command('climb', 'You climb a tree, but don\'t see much that is special apart from a lake to the north')
+stream_swim = Room_Command('swim', 'You take a refreshing dip in the stream')
+
+path.set_special(path_climb)
+stream.set_special(stream_swim)
+stream2.set_special(stream_swim)
 
 # Enemies
 dave = Enemy('Dave', 'A smelly grumpy zombie')
@@ -191,13 +200,13 @@ while not dead:
     if command in ['north', 'south', 'west', 'east', 'n', 's', 'w', 'e']:
         current_room = current_room.move(command)
     elif command == 'climb':
-        if current_room.get_special() == 'climb':
-            print(current_room.get_special_text())
+        if current_room.get_special('climb') is True:
+            print(current_room.get_special_text('climb'))
         else:
             print('There is nothing to climb here')
     elif command == 'swim':
-        if current_room.get_special() == 'swim':
-            print(current_room.get_special_text())
+        if current_room.get_special('swim') is True:
+            print(current_room.get_special_text('swim'))
         else:
             print('There is nothing to swim in here')
 
