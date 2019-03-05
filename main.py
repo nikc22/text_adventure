@@ -167,6 +167,7 @@ apple_pie = Item('Apple Pie', 'A freshly baked pie made with apples form the orc
 duster = Item('feather duster', 'A moth eaten excuse for a duster', 1.0)
 flower = Item('flowers', 'A bunch of lovely daisies', 0.5)
 
+kitchen.set_character(oscar)
 dinning_hall.set_character(dave)
 ballroom.set_character(connie)
 bridge.set_character(jill)
