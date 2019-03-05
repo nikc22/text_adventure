@@ -150,9 +150,9 @@ jim = Friend('Jim', 'A friendly gardiner')
 jim.set_conversation('I hope it doens\'t rain inside again today')
 jim.set_hint('Jack doesn\'t like books')
 
-oscar = Friend('oscar', 'A friendly little white dog with a very waggy tail')
+oscar = Friend('Oscar', 'A friendly little white dog with a very waggy tail')
 oscar.set_conversation('Where''s my treat human')
-# oscar.set_hint('Jack doesn\'t like books')
+oscar.set_hint('I''ll guard the treat cupboard for you')
 
 
 # Neutral
