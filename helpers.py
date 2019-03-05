@@ -15,6 +15,7 @@ def help_contents():
     print('hum - a way of waiting for something to happen')
     print('climb - some places have things that you can climb')
     print('swim - swim in a body of water')
+    print('pick - pick flowers or herbs from this location')
     print('score - print the scores so far')
     print('exit - leave the game')
     return True

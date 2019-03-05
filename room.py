@@ -7,8 +7,6 @@ class Room():
         self.linked_rooms = {}
         self.character = None
         self.item = None
-        # self.special = None
-        # self.special_text = None
         self.special_commands = {}
         self.lock = False
         self.unlock_item = None
@@ -38,12 +36,6 @@ class Room():
 
     def get_lock_status(self):
         return self.lock
-
-#    def set_special2(self, special_thing, special_text):
-        """Sets the command that is special and it's text for a room"""
-#        self.special = special_thing
-#        self.special_text = special_text
-#        self.special_commands[special_thing] = special_text
 
     def set_special(self, room_command):
         self.special_commands[room_command.get_command()] = room_command

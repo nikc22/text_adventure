@@ -114,15 +114,18 @@ bigstreet.link_room(school_room, 'east')
 school_room.link_room(bigstreet, 'west')
 
 # Special Commands
-# path.set_special2('climb', 'You climb a tree, but don\'t see much that is special apart from a lake to the north')
-# stream.set_special2('swim', 'You take a refreshing dip in the stream')
 
 path_climb = Room_Command('climb', 'You climb a tree, but don\'t see much that is special apart from a lake to the north')
+path_pick = Room_Command('pick', 'You pick some flowers, although the wilt in your hand as you pick them')
 stream_swim = Room_Command('swim', 'You take a refreshing dip in the stream')
+stream_pick = Room_Command('pick', 'You pick some flowers, although the wilt in your hand as you pick them')
 
 path.set_special(path_climb)
+path.set_special(path_pick)
 stream.set_special(stream_swim)
 stream2.set_special(stream_swim)
+stream.set_special(stream_pick)
+stream2.set_special(stream_pick)
 
 # Enemies
 dave = Enemy('Dave', 'A smelly grumpy zombie')
@@ -157,6 +160,7 @@ book = Item('book', 'A tome full of wonderous knowledge', 3.0)
 breadstick = Item('breadstick', 'A baugette old enough to be used as a weapon', 1.5)
 apple_pie = Item('Apple Pie', 'A freshly baked pie made with apples form the orchard', 2.0)
 duster = Item('feather duster', 'A moth eaten excuse for a duster', 1.0)
+flower = Item('flowers', 'A bunch of lovely daisies', 0.5)
 
 dinning_hall.set_character(dave)
 ballroom.set_character(connie)
@@ -199,6 +203,8 @@ while not dead:
     # Movement Commands
     if command in ['north', 'south', 'west', 'east', 'n', 's', 'w', 'e']:
         current_room = current_room.move(command)
+
+    # Room commands
     elif command == 'climb':
         if current_room.get_special('climb') is True:
             print(current_room.get_special_text('climb'))
@@ -209,6 +215,11 @@ while not dead:
             print(current_room.get_special_text('swim'))
         else:
             print('There is nothing to swim in here')
+    elif command == 'pick':
+        if current_room.get_special('pick') is True:
+            print(current_room.get_special_text('pick'))
+        else:
+            print('There is nothing to pick here')
 
     # Character Commands
     elif command == 'talk':
