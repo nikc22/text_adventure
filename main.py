@@ -50,6 +50,8 @@ school_room = Room('School Room', 'A classroom full of students, listening to La
 
 kitchen.link_room(dinning_hall, 'south')
 kitchen.link_room(shed, 'east')
+kitchen.link_room(herb_garden, 'north')
+herb_garden.link_room(kitchen, 'south')
 dinning_hall.link_room(kitchen, 'north')
 dinning_hall.link_room(ballroom, 'west')
 dinning_hall.link_room(drawing_room, 'south')
@@ -119,6 +121,7 @@ path_climb = Room_Command('climb', 'You climb a tree, but don\'t see much that i
 path_pick = Room_Command('pick', 'You pick some flowers and try and put them in your bacpack')
 stream_swim = Room_Command('swim', 'You take a refreshing dip in the stream')
 stream_pick = Room_Command('pick', 'You pick some flowers, although the wilt in your hand as you pick them')
+herb_garden_pick = Room_Command('pick', 'You pick some herbs and try and put them in your bacpack')
 
 path.set_special(path_climb)
 path.set_special(path_pick)
@@ -126,6 +129,7 @@ stream.set_special(stream_swim)
 stream2.set_special(stream_swim)
 stream.set_special(stream_pick)
 stream2.set_special(stream_pick)
+herb_garden.set_special(herb_garden_pick)
 
 # Enemies
 dave = Enemy('Dave', 'A smelly grumpy zombie')
@@ -166,6 +170,7 @@ breadstick = Item('breadstick', 'A baugette old enough to be used as a weapon', 
 apple_pie = Item('Apple Pie', 'A freshly baked pie made with apples form the orchard', 2.0)
 duster = Item('feather duster', 'A moth eaten excuse for a duster', 1.0)
 flower = Item('flowers', 'A bunch of lovely daisies', 0.5)
+herb = Item('herbs', 'A bunch of Rosemary and Thyme', 0.5)
 
 kitchen.set_character(oscar)
 dinning_hall.set_character(dave)
@@ -183,6 +188,7 @@ drawing_room.set_item(duster)
 
 # Special Command Items
 path_pick.set_item(flower)
+herb_garden_pick.set_item(herb)
 
 backpack = Backpack(15.0)  # Number determines backpack capacity
 
