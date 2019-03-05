@@ -20,8 +20,8 @@ ballroom = Room('Ballroom', 'A place where various conspiricies and affairs of t
 drawing_room = Room('Drawing Room', 'An austere room with large couches dominating the space')
 shed = Room('Shed', 'A garden shed full of interesting items')
 path = Room('Path', 'A path leading from the house to the stream, lined with trees. There are flowers here')
-stream = Room('Stream', 'A burbbling little stream, crossed by a bridge to the north')
-stream2 = Room('Stream', 'A burbbling little stream, crossed by a bridge to the north')
+stream = Room('Stream', 'A burbbling little stream, crossed by a bridge to the north. There are flowers here')
+stream2 = Room('Stream', 'A burbbling little stream, crossed by a bridge to the north. There are flowers here')
 bridge = Room('Bridge', 'A bridge that to nowhere')
 general_store = Room('General Store', 'A small shop filled with curious items')
 entrance = Room('Entrance', 'A small room with an umbrella stand behind wooden doors that are two stories high')
@@ -149,6 +149,11 @@ connie.set_hint('Dave doesn\'t like cheese.')
 jim = Friend('Jim', 'A friendly gardiner')
 jim.set_conversation('I hope it doens\'t rain inside again today')
 jim.set_hint('Jack doesn\'t like books')
+
+oscar = Friend('oscar', 'A friendly little white dog with a very waggy tail')
+oscar.set_conversation('Where''s my treat human')
+# oscar.set_hint('Jack doesn\'t like books')
+
 
 # Neutral
 gaylord = Nuetral('Gaylord', 'A Bored Shop keeper')
