@@ -220,27 +220,22 @@ while not dead:
         current_room = current_room.move(command)
 
     # Room commands
-    elif command == 'climb':
-        if current_room.get_special('climb') is True:
-            print(current_room.get_special_text('climb'))
-        else:
-            print('There is nothing to climb here')
-    elif command == 'swim':
-        if current_room.get_special('swim') is True:
-            print(current_room.get_special_text('swim'))
-        else:
-            print('There is nothing to swim in here')
-    elif command == 'pick':
-        if current_room.get_special('pick') is True:
-            print(current_room.get_special_text('pick'))
-            item = current_room.get_special_item('pick')
+    elif command in ('pick', 'climb', 'swim'):
+        if current_room.get_special(command) is True:
+            print(current_room.get_special_text(command))
+            item = current_room.get_special_item(command)
             if item is not None:
                 if backpack.add_item(item) is True:
                     print('The ' + item.get_name() + ' is now in your backpack')
                 else:
                     print('The ' + item.get_name() + ' didn\'t fit in your backpack, maybe you need to drop an item')
         else:
-            print('There is nothing to pick here')
+            if command == 'pick':
+                print('There is nothing to pick here')
+            elif command == 'climb':
+                print('There is nothing to climb here')
+            elif command == 'swim':
+                print('There is nothing to swim in here')
 
     # Character Commands
     elif command == 'talk':
