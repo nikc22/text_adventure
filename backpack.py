@@ -29,7 +29,7 @@ class Backpack():
     def drop_item(self, item):
         """Removes an item fromt the Backapack"""
         ind = self.items[item]
-        self.items[item] = None
+        del self.items[item]
         self.weight -= ind.get_weight()
         return ind
 
