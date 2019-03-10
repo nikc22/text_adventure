@@ -27,6 +27,10 @@ class Character():
         print(self.name + " doesn't want to fight with you")
         return True
 
+    def give(self, gift_item):
+        print(self.name + ' doesn\'t want your ' + gift_item.get_name())
+        return False
+
 
 class Enemy(Character):
 
@@ -78,6 +82,10 @@ class Friend(Character):
         """Returns the friends hint if there is one"""
         if self.hint is not None:
             print("[" + self.name + "] says: " + self.hint)
+
+    def give(self, gift_item):
+        print('[' + self.name + '] says: Thank you for the ' + gift_item.get_name())
+        return True
 
 
 class Nuetral(Character):

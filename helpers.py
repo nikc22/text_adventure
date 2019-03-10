@@ -9,6 +9,7 @@ def help_contents():
     print('talk - hear what the room inhabitant has to say')
     print('hug - hug the room inhabitant, be careful not to hug enemies')
     print('take, get - pick up an item')
+    print('give - give an item to somebody else')
     print('drop - remove an item from your backpack and leave it in the current room')
     print('inv - display the contents of my backpack')
     print('fight - challenge the room inhabitant to a duel with an item')

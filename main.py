@@ -229,6 +229,7 @@ while not dead:
                     print('The ' + item.get_name() + ' is now in your backpack')
                 else:
                     print('The ' + item.get_name() + ' didn\'t fit in your backpack, maybe you need to drop an item')
+                    # drop item if it doesn't fit, when rooms can have multiple items
         else:
             if command == 'pick':
                 print('There is nothing to pick here')
@@ -282,6 +283,17 @@ while not dead:
                 print('You don\'t have a ' + drop_item + ' in your backpack')
         else:
             print('There is already an item in this room, you\'ll need to drop it somewhere else')
+    elif command == 'give':
+        print('What would you like to give?')
+        gift_item = input('+ ')
+        if gift_item in backpack.get_items():
+            item = backpack.drop_item(gift_item)
+            if inhabitant.give(item) is True:
+                favours += 1
+            else:
+                backpack.drop_item(item)
+        else:
+            print('You don\'t have a ' + gift_item + ' in your backpack')
     elif command == 'inv':
         backpack.get_inventory()
 
