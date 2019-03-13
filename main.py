@@ -14,20 +14,44 @@ def print_score():
     print(str(favours) + ' favours done')
 
 
+# Ground Floor
 kitchen = Room('Kitchen', 'A dank and dirty room buzzing with flies')
 dinning_hall = Room('Dinning Hall', 'A large room with ornate golden decorations on every wall')
 ballroom = Room('Ballroom', 'A place where various conspiricies and affairs of the heart were launched, admist dancing and cavorting')
+ballroom_2 = Room('Ballroom', 'A place where various conspiricies and affairs of the heart were launched, admist dancing and cavorting')
 drawing_room = Room('Drawing Room', 'An austere room with large couches dominating the space')
+entrance = Room('Entrance', 'A small room with an umbrella stand behind wooden doors that are two stories high')
+games_room = Room('Games Room', 'A place for billiards and discussion after dinner')
+stairs = Room('Stairs', 'A grand staircase leading up to the first floor and down to the cellar')
+
+# 1st Floor
+stairs_1 = Room('Stairs', 'A grand staircase leading down to the ground floor')
+bed_1 = Room('Bed 1', 'A bedroom with a quilt that matches the curtains, full of flowers')
+bed_2 = Room('Bed 2', 'A bedroom with interesting furniture')
+master_1 = Room('Master Bedroom - Southern End', 'A large space dominated by an ornate bed')
+master_2 = Room('Master Bedroom - Northern End', 'A large space dominated by an ornate bed')
+library = Room('Library', 'A room full of books and comfortable chairs, in which to read them')
+bathroom = Room('Bathroom', 'A room with a lovely free standing bath and a pile of big thick towels')
+linen_cupboard = Room('Linen Cupboard', 'A space filled with a range of items designed to keep the house running')
+balcony_1 = Room('Balcony', 'Looking out over the orchard a gardens')
+balcony_2 = Room('Balcony', 'Looking out over the orchard a gardens')
+hall1 = Room('Hall', 'A room that connects other rooms on the first floor')
+hall2 = Room('Hall', 'A room that connects other rooms on the first floor')
+hall3 = Room('Hall', 'A room that connects other rooms on the first floor')
+hall4 = Room('Hall', 'A room that connects other rooms on the first floor')
+
+# Cellar
+stairs_d = Room('Stairs', 'A grand staircase leading up to the ground floor')
+wine_cellar = Room('Wine Cellar', 'A room full of slowly aging bottles of wine and slight musty smell')
+larder = Room('Larder', 'A room full of the dried goods that keep keeps the kitchen supplied')
+
 shed = Room('Shed', 'A garden shed full of interesting items')
 path = Room('Path', 'A path leading from the house to the stream, lined with trees. There are flowers here')
 stream = Room('Stream', 'A burbbling little stream, crossed by a bridge to the north. There are flowers here')
 stream2 = Room('Stream', 'A burbbling little stream, crossed by a bridge to the north. There are flowers here')
 bridge = Room('Bridge', 'A bridge that to nowhere')
 general_store = Room('General Store', 'A small shop filled with curious items')
-entrance = Room('Entrance', 'A small room with an umbrella stand behind wooden doors that are two stories high')
 drive = Room('Driveway', 'A promenade that leads to the carriage way, with buggy near the house, unfortunately wihtout the horse')
-games_room = Room('Games Room', 'A place for billiards and discussion after dinner')
-stairs = Room('Stairs', 'A grand staircase leading up to the first floor and down to the cellar')
 herb_garden = Room('Herb Garden', 'A lovely garden full of fresh Rosemary and Thyme, amongst other things')
 carriageway = Room('Carriage Way', 'A road way that leads from the village to destinations unknown')
 carriageway2 = Room('Carriage Way', 'A road way that leads from the village to destinations unknown')
@@ -46,8 +70,11 @@ bigstreet = Room('Big Street', 'The secondary street of the village')
 bigstreet2 = Room('Big Street', 'The secondary street of the village')
 school_room = Room('School Room', 'A classroom full of students, listening to Laura tell them about coding Raspberry Pi''s')
 
-# bathroom.set_unlock_item('House Key', True, 'The lady of the house is using the bathroom')
+# Locks
+bathroom.set_unlock_item('House Key', True, 'The lady of the house is using the bathroom')
 
+# House
+# Ground floor
 kitchen.link_room(dinning_hall, 'south')
 kitchen.link_room(shed, 'east')
 kitchen.link_room(herb_garden, 'north')
@@ -63,6 +90,54 @@ ballroom.link_room(games_room, 'south')
 games_room.link_room(ballroom, 'north')
 games_room.link_room(drawing_room, 'east')
 games_room.link_room(stairs, 'south')
+entrance.link_room(drawing_room, 'north')
+entrance.link_room(drive, 'south')
+entrance.link_room(stairs, "west")
+stairs.link_room(games_room, 'north')
+stairs.link_room(entrance, 'east')
+stairs.link_room(stairs_d, "down")
+stairs.link_room(stairs_1, "up")
+
+
+# Cellar
+stairs_d.link_room(stairs, "up")
+stairs_d.link_room(wine_cellar, "north")
+wine_cellar.link_room(stairs_d, "south")
+wine_cellar.link_room(larder, "east")
+larder.link_room(wine_cellar, "west")
+
+# First Floor
+stairs_1.link_room(stairs, "down")
+stairs_1.link_room(hall1, "east")
+hall1.link_room(stairs_1, "west")
+hall1.link_room(hall2, "north")
+hall1.link_room(master_1, "east")
+hall2.link_room(hall1, "south")
+hall2.link_room(hall3, "north")
+hall2.link_room(bed_1, "west")
+hall2.link_room(master_2, "east")
+hall3.link_room(hall2, "south")
+hall3.link_room(hall4, "north")
+hall3.link_room(library, "west")
+hall3.link_room(bathroom, "east")
+hall4.link_room(hall3, "south")
+hall4.link_room(bed_2, "west")
+hall4.link_room(linen_cupboard, "east")
+master_1.link_room(hall1, "west")
+master_1.link_room(balcony_1, "east")
+master_1.link_room(master_2, "north")
+master_2.link_room(hall2, "west")
+master_2.link_room(balcony_2, "east")
+master_2.link_room(master_1, "south")
+bed_1.link_room(hall2, "east")
+bed_2.link_room(hall4, "east")
+linen_cupboard.link_room(hall4, "west")
+balcony_1.link_room(master_1, "west")
+balcony_2.link_room(master_2, "west")
+bathroom.link_room(hall3, "west")
+library.link_room(hall3, "east")
+
+
 shed.link_room(kitchen, 'west')
 shed.link_room(path, 'east')
 path.link_room(shed, 'west')
@@ -72,11 +147,6 @@ stream.link_room(stream2, 'north')
 stream2.link_room(stream, 'south')
 stream2.link_room(bridge, 'north')
 bridge.link_room(stream2, 'south')
-entrance.link_room(drawing_room, 'north')
-entrance.link_room(drive, 'south')
-entrance.link_room(stairs, "west")
-stairs.link_room(games_room, 'north')
-stairs.link_room(entrance, 'east')
 drive.link_room(entrance, 'north')
 drive.link_room(carriageway, 'south')
 carriageway.link_room(drive, 'north')
@@ -120,7 +190,7 @@ school_room.link_room(bigstreet, 'west')
 path_climb = Room_Command('climb', 'You climb a tree, but don\'t see much that is special apart from a lake to the north')
 path_pick = Room_Command('pick', 'You pick some flowers and try and put them in your bacpack')
 stream_swim = Room_Command('swim', 'You take a refreshing dip in the stream')
-stream_pick = Room_Command('pick', 'You pick some flowers, although the wilt in your hand as you pick them')
+stream_pick = Room_Command('pick', 'You pick some flowers, although they wilt in your hand as you pick them')
 herb_garden_pick = Room_Command('pick', 'You pick some herbs and try and put them in your bacpack')
 
 path.set_special(path_climb)
@@ -216,7 +286,7 @@ while not dead:
     command = input("> ")
 
     # Movement Commands
-    if command in ['north', 'south', 'west', 'east', 'n', 's', 'w', 'e']:
+    if command in ['north', 'south', 'west', 'east', 'n', 's', 'w', 'e', 'down', 'up', 'd', 'u']:
         current_room = current_room.move(command)
 
     # Room commands

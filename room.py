@@ -139,6 +139,10 @@ class Room():
             direction = 'west'
         elif direction == 'e':
             direction = 'east'
+        elif direction == 'd':
+            direction = 'down'
+        elif direction == 'u':
+            direction = 'up'
 
         if direction in self.linked_rooms:
             next_room = self.linked_rooms[direction]
