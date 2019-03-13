@@ -291,7 +291,10 @@ while not dead:
             if inhabitant.give(item) is True:
                 favours += 1
             else:
-                backpack.drop_item(item)
+                if current_room.item is None:
+                    current_room.item = item
+                else:
+                    backpack.add_item(item)
         else:
             print('You don\'t have a ' + gift_item + ' in your backpack')
     elif command == 'inv':
