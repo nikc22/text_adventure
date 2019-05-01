@@ -1,5 +1,7 @@
 # Text Adventure
-Version of the Raspberry Pi OOP course, that builds a text based adventure game in Python
+Version of the Raspberry Pi OOP course, that builds a text based adventure game in Python:
+
+https://www.futurelearn.com/courses/object-oriented-principles
 
 ## Changes
 
