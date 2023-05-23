@@ -8,6 +8,7 @@ def help_contents():
     print('north, south, west, east, up, down - move in that direction, short command of first letter also available')
     print('talk - hear what the room inhabitant has to say')
     print('hug - hug the room inhabitant, be careful not to hug enemies')
+    print('pat - pat the room inhabitant, be careful, some don''t like it')
     print('take, get - pick up an item')
     print('give - give an item to somebody else')
     print('drop - remove an item from your backpack and leave it in the current room')

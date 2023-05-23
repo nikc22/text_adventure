@@ -1,3 +1,4 @@
+# Ctrl-Alt-B Run in SublimeREPL window
 from room import Room
 from character import Enemy, Friend, Nuetral
 from item import Item
@@ -228,6 +229,9 @@ oscar = Friend('Oscar', 'A friendly little white dog with a very waggy tail')
 oscar.set_conversation('Where''s my treat human')
 oscar.set_hint('I''ll guard the treat cupboard for you')
 
+laura = Friend('Laura', 'A harassed teacher')
+laura.set_conversation('Will they ever learn, regression really isn''t that hard... isn''t that hard...')
+# laura.set_hint('Likes wine')
 
 # Neutral
 gaylord = Nuetral('Gaylord', 'A Bored Shop keeper')
@@ -241,6 +245,7 @@ apple_pie = Item('Apple Pie', 'A freshly baked pie made with apples form the orc
 duster = Item('feather duster', 'A moth eaten excuse for a duster', 1.0)
 flower = Item('flowers', 'A bunch of lovely daisies', 0.5)
 herb = Item('herbs', 'A bunch of Rosemary and Thyme', 0.5)
+wine = Item('wine', 'A nice bottle of red', 1.0)
 
 kitchen.set_character(oscar)
 dinning_hall.set_character(dave)
@@ -249,12 +254,14 @@ bridge.set_character(jill)
 shed.set_character(jack)
 drawing_room.set_character(jim)
 general_store.set_character(gaylord)
+school_room.set_character(laura)
 
 ballroom.set_item(cheese)
 dinning_hall.set_item(book)
 kitchen.set_item(apple_pie)
 games_room.set_item(breadstick)
 drawing_room.set_item(duster)
+wine_cellar.set_item(wine)
 
 # Special Command Items
 path_pick.set_item(flower)
@@ -310,12 +317,18 @@ while not dead:
 
     # Character Commands
     elif command == 'talk':
-        inhabitant.talk()
-    elif command == 'hum':
-        if isinstance(inhabitant, Friend):
-            inhabitant.get_hint()
-        else:
+        if inhabitant is not None:
             inhabitant.talk()
+        else:
+            print('Talking to onseself is a sign of madness')
+    elif command == 'hum':
+        if inhabitant is not None:
+            if isinstance(inhabitant, Friend):
+                inhabitant.get_hint()
+            else:
+                inhabitant.talk()
+        else:
+            print('Time goes by')
     elif command == 'fight':
         print('What would you like to fight with?')
         fight_item = input('+ ')
@@ -329,6 +342,11 @@ while not dead:
             print('You don\'t have a ' + fight_item + ' in your backpack')
     elif command == 'hug':
         if inhabitant.hug() is False:
+            dead = True
+        else:
+            hugs += 1
+    elif command == 'pat':
+        if inhabitant.pat() is False:
             dead = True
         else:
             hugs += 1

@@ -74,6 +74,14 @@ class Friend(Character):
         print(self.name + ' hugs you back')
         return True
 
+    def pat(self):
+        """Pats your friend"""
+        if self.name == 'oscar':
+            print(self.name + ' wags his tail')
+        else:
+            print(self.name + ' grins')
+        return True
+
     def set_hint(self, friend_hint):
         """Sets the friends hint"""
         self.hint = friend_hint
