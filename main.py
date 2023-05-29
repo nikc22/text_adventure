@@ -19,7 +19,7 @@ def print_score():
 kitchen = Room('Kitchen', 'A dank and dirty room buzzing with flies')
 dinning_hall = Room('Dinning Hall', 'A large room with ornate golden decorations on every wall')
 ballroom = Room('Ballroom', 'A place where various conspiricies and affairs of the heart were launched, admist dancing and cavorting')
-ballroom_2 = Room('Ballroom', 'A place where various conspiricies and affairs of the heart were launched, admist dancing and cavorting')
+ballroom_2 = Room('Ballroom - North', 'A place where various conspiricies and affairs of the heart were launched, admist dancing and cavorting')
 drawing_room = Room('Drawing Room', 'An austere room with large couches dominating the space')
 entrance = Room('Entrance', 'A small room with an umbrella stand behind wooden doors that are two stories high')
 games_room = Room('Games Room', 'A place for billiards and discussion after dinner')
@@ -46,14 +46,17 @@ stairs_d = Room('Stairs', 'A grand staircase leading up to the ground floor')
 wine_cellar = Room('Wine Cellar', 'A room full of slowly aging bottles of wine and slight musty smell')
 larder = Room('Larder', 'A room full of the dried goods that keep keeps the kitchen supplied')
 
+#Grounds
 shed = Room('Shed', 'A garden shed full of interesting items')
 path = Room('Path', 'A path leading from the house to the stream, lined with trees. There are flowers here')
-stream = Room('Stream', 'A burbbling little stream, crossed by a bridge to the north. There are flowers here')
-stream2 = Room('Stream', 'A burbbling little stream, crossed by a bridge to the north. There are flowers here')
-bridge = Room('Bridge', 'A bridge that to nowhere')
-general_store = Room('General Store', 'A small shop filled with curious items')
 drive = Room('Driveway', 'A promenade that leads to the carriage way, with buggy near the house, unfortunately wihtout the horse')
 herb_garden = Room('Herb Garden', 'A lovely garden full of fresh Rosemary and Thyme, amongst other things')
+
+# Surrounds
+stream = Room('Stream', 'A burbbling little stream, crossed by a bridge to the north. There are flowers here')
+stream2 = Room('Stream', 'A burbbling little stream, crossed by a bridge to the north. There are flowers here')
+bridge = Room('Bridge', 'A bridge to nowhere')
+under_bridge = Room('Under Bridge', 'Access to the Stream under the Bridge')
 carriageway = Room('Carriage Way', 'A road way that leads from the village to destinations unknown')
 carriageway2 = Room('Carriage Way', 'A road way that leads from the village to destinations unknown')
 carriageway3 = Room('Carriage Way', 'A road way that leads from the village to destinations unknown')
@@ -65,10 +68,13 @@ carriageway8 = Room('Carriage Way', 'A road way that leads from the village to d
 carriageway9 = Room('Carriage Way', 'A road way that leads from the village to destinations unknown')
 carriageway10 = Room('Carriage Way', 'A road way that leads from the village to destinations unknown')
 carriagewaybridge = Room('Carriage Way Bridge', 'A bridge that links the carriage way, with the village on one side')
+
+# Village
 mainstreet = Room('Main Street', 'The main street of the village')
 mainstreet2 = Room('Main Street', 'The main street of the village')
 bigstreet = Room('Big Street', 'The secondary street of the village')
 bigstreet2 = Room('Big Street', 'The secondary street of the village')
+general_store = Room('General Store', 'A small shop filled with curious items')
 school_room = Room('School Room', 'A classroom full of students, listening to Laura tell them about coding Raspberry Pi''s')
 
 # Locks
@@ -88,6 +94,8 @@ drawing_room.link_room(entrance, 'south')
 drawing_room.link_room(games_room, 'west')
 ballroom.link_room(dinning_hall, 'east')
 ballroom.link_room(games_room, 'south')
+ballroom.link_room(ballroom_2, 'north')
+ballroom_2.link_room(ballroom, 'south')
 games_room.link_room(ballroom, 'north')
 games_room.link_room(drawing_room, 'east')
 games_room.link_room(stairs, 'south')
@@ -193,6 +201,7 @@ path_pick = Room_Command('pick', 'You pick some flowers and try and put them in 
 stream_swim = Room_Command('swim', 'You take a refreshing dip in the stream')
 stream_pick = Room_Command('pick', 'You pick some flowers, although they wilt in your hand as you pick them')
 herb_garden_pick = Room_Command('pick', 'You pick some herbs and try and put them in your bacpack')
+under_bridge_pick = Room_Command('pick', 'You gather of muscles')
 
 path.set_special(path_climb)
 path.set_special(path_pick)
@@ -223,7 +232,7 @@ connie.set_hint('Dave doesn\'t like cheese.')
 
 jim = Friend('Jim', 'A friendly gardiner')
 jim.set_conversation('I hope it doens\'t rain inside again today')
-jim.set_hint('Jack doesn\'t like books')
+jim.set_hint('Jack doesn''t like books')
 
 oscar = Friend('Oscar', 'A friendly little white dog with a very waggy tail')
 oscar.set_conversation('Where''s my treat human')
@@ -246,6 +255,7 @@ duster = Item('duster', 'A moth eaten excuse for a duster', 1.0)
 flower = Item('flowers', 'A bunch of lovely daisies', 0.5)
 herb = Item('herbs', 'A bunch of Rosemary and Thyme', 0.5)
 wine = Item('wine', 'A nice bottle of red', 1.0)
+muscle = Item('Muscles', 'A tasty treat', 0.5)
 
 kitchen.set_character(oscar)
 dinning_hall.set_character(dave)
@@ -266,6 +276,7 @@ wine_cellar.set_item(wine)
 # Special Command Items
 path_pick.set_item(flower)
 herb_garden_pick.set_item(herb)
+under_bridge.set_item(muscle)
 
 backpack = Backpack(15.0)  # Number determines backpack capacity
 
@@ -333,9 +344,15 @@ while not dead:
         print('What would you like to fight with?')
         fight_item = input('+ ')
         if fight_item in backpack.get_items():
+
             if inhabitant.fight(fight_item) is False:
                 dead = True
             else:
+                #print ('Fight won, Current: ' + current_room.character.name)
+                if current_room.character.name == 'Jill':
+                    #print('Add room here')
+                    bridge.link_room(under_bridge, 'down')
+                    under_bridge.link_room(bridge, 'up')
                 current_room.character = None
                 fights += 1
         else:

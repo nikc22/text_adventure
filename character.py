@@ -31,6 +31,9 @@ class Character():
         print(self.name + ' doesn\'t want your ' + gift_item.get_name())
         return False
 
+    def get_name(self):
+        """Prints the characters name and description"""
+        return self.name
 
 class Enemy(Character):
 
@@ -80,6 +83,7 @@ class Friend(Character):
             print(self.name + ' wags his tail')
         else:
             print(self.name + ' grins')
+
         return True
 
     def set_hint(self, friend_hint):
