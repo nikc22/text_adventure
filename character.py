@@ -124,3 +124,12 @@ class Nuetral(Character):
         """Hug a Neutral character"""
         print('[' + self.name + '] says: That was akward')
         return True
+
+    def set_hint(self, friend_hint):
+        """Sets the friends hint"""
+        self.hint = friend_hint
+
+    def get_hint(self):
+        """Returns the friends hint if there is one"""
+        if self.hint is not None:
+            print("[" + self.name + "] says: " + self.hint)
