@@ -64,6 +64,11 @@ class Enemy(Character):
         self.fight('nothing')
         return False
 
+    def pat(self):
+        """Patting an enemy results in a fight"""
+        self.fight('nothing')
+        return False
+
 
 class Friend(Character):
 
@@ -71,6 +76,7 @@ class Friend(Character):
         """Creates a freindly character"""
         super().__init__(char_name, char_description)
         self.hint = None
+        self.like = None
 
     def hug(self):
         """Hugs your friend"""
@@ -79,7 +85,7 @@ class Friend(Character):
 
     def pat(self):
         """Pats your friend"""
-        if self.name == 'oscar':
+        if self.name == 'Oscar':
             print(self.name + ' wags his tail')
         else:
             print(self.name + ' grins')
@@ -96,9 +102,17 @@ class Friend(Character):
             print("[" + self.name + "] says: " + self.hint)
 
     def give(self, gift_item):
-        print('[' + self.name + '] says: Thank you for the ' + gift_item.get_name())
-        return True
+        print('Gift: ' + gift_item.get_name() + ' Likes: ' + self.like)
+        if gift_item.get_name() == self.like:
+            print('[' + self.name + '] says: Thank you for the ' + gift_item.get_name() + ', it''s my favorite')
+            ret = 'Fav'
+        else:
+            print('[' + self.name + '] says: Thank you for the ' + gift_item.get_name())
+            ret = 'Gift'
+        return ret
 
+    def set_likes(self, like_item):
+        self.like = like_item
 
 class Nuetral(Character):
 

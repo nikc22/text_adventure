@@ -13,6 +13,7 @@ def print_score():
     print(str(hugs) + ' hugs given')
     print(str(fights) + ' fights won')
     print(str(favours) + ' favours done')
+    print(str(quests) + ' quests completed')
 
 
 # Ground Floor
@@ -85,7 +86,6 @@ bathroom.set_unlock_item('House Key', True, 'The lady of the house is using the 
 kitchen.link_room(dinning_hall, 'south')
 kitchen.link_room(shed, 'east')
 kitchen.link_room(herb_garden, 'north')
-herb_garden.link_room(kitchen, 'south')
 dinning_hall.link_room(kitchen, 'north')
 dinning_hall.link_room(ballroom, 'west')
 dinning_hall.link_room(drawing_room, 'south')
@@ -146,18 +146,21 @@ balcony_2.link_room(master_2, "west")
 bathroom.link_room(hall3, "west")
 library.link_room(hall3, "east")
 
-
+# Grounds
+herb_garden.link_room(kitchen, 'south')
 shed.link_room(kitchen, 'west')
 shed.link_room(path, 'east')
 path.link_room(shed, 'west')
 path.link_room(stream, 'east')
+drive.link_room(entrance, 'north')
+drive.link_room(carriageway, 'south')
+
+# Outer
 stream.link_room(path, 'west')
 stream.link_room(stream2, 'north')
 stream2.link_room(stream, 'south')
 stream2.link_room(bridge, 'north')
 bridge.link_room(stream2, 'south')
-drive.link_room(entrance, 'north')
-drive.link_room(carriageway, 'south')
 carriageway.link_room(drive, 'north')
 carriageway.link_room(carriageway2, 'east')
 carriageway2.link_room(carriageway, 'west')
@@ -237,6 +240,7 @@ jim.set_hint('Jack doesn''t like books')
 oscar = Friend('Oscar', 'A friendly little white dog with a very waggy tail')
 oscar.set_conversation('Where''s my treat human')
 oscar.set_hint('I''ll guard the treat cupboard for you')
+oscar.set_likes('Muscles')
 
 laura = Friend('Laura', 'A harassed teacher')
 laura.set_conversation('Will they ever learn, regression really isn''t that hard... isn''t that hard...')
@@ -285,6 +289,7 @@ dead = False
 hugs = 0
 fights = 0
 favours = 0
+quests = 0
 
 
 print('Welcome to a little adventure')
@@ -393,8 +398,11 @@ while not dead:
         gift_item = input('+ ')
         if gift_item in backpack.get_items():
             item = backpack.drop_item(gift_item)
-            if inhabitant.give(item) is True:
+            ret = inhabitant.give(item)
+            if  ret == 'Gift':
                 favours += 1
+            elif ret == 'Fav':
+                quests += 1
             else:
                 if current_room.item is None:
                     current_room.item = item
