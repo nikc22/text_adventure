@@ -204,7 +204,7 @@ path_pick = Room_Command('pick', 'You pick some flowers and try and put them in 
 stream_swim = Room_Command('swim', 'You take a refreshing dip in the stream')
 stream_pick = Room_Command('pick', 'You pick some flowers, although they wilt in your hand as you pick them')
 herb_garden_pick = Room_Command('pick', 'You pick some herbs and try and put them in your bacpack')
-under_bridge_pick = Room_Command('pick', 'You gather of muscles')
+under_bridge_pick = Room_Command('pick', 'You gather a brace of muscles')
 
 path.set_special(path_climb)
 path.set_special(path_pick)
@@ -244,11 +244,13 @@ oscar.set_likes('Muscles')
 
 laura = Friend('Laura', 'A harassed teacher')
 laura.set_conversation('Will they ever learn, regression really isn''t that hard... isn''t that hard...')
-# laura.set_hint('Likes wine')
+laura.set_hint('Jill doesn''t like dusters')
 
 # Neutral
 gaylord = Nuetral('Gaylord', 'A Bored Shop keeper')
 gaylord.set_conversation('I don\'t have many things to sell, can you bring me some more items for my shop')
+gaylord.set_hint('Laura likes wine')
+
 
 
 cheese = Item('cheese', 'A large and smelly block of cheese', 2.0)
